@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @group.name %>
+</p>
+
+<p>
+  <strong>Num of guests allowed:</strong>
+  <%= @group.num_of_guests_allowed %>
+</p>
+
+<p>
+  <strong>Day before invite:</strong>
+  <%= @group.day_before_invite %>
+</p>
+
+<p>
+  <strong>Day after invite:</strong>
+  <%= @group.day_after_invite %>
+</p>
+
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>

@@ -1,0 +1,139 @@
+<% #TODO: refactor this to be more dynamic %>
+<% #lockChanges=false %>
+<% lockChanges=true %>
+<%= form_for @guest, method: "post", url: url, html: {class: "form-horizontal"} do |f| %>
+  <fieldset>
+    <%= hidden_field_tag('id', @guest.id) %>
+    <% url_path = ENV['SITE_URL'] + "/guests/"+@guest.auth_token+"/view_invitation" %>
+    <% if @group.late_addition? %>
+        <legend class="text-center">Kindly RSVP by July 29th, <a href="<%= url_path %>">view invitation</a></legend>
+    <% else %>
+        <legend class="text-center">Kindly RSVP by July 1st, <a href="<%= url_path %>">view invitation</a></legend>
+    <% end %>
+    <div class="form-group">
+      <div class="col-md-8 control-label" >
+        <label for="attending">Attending Saturday Ceremony and Reception?</label>
+        <br>Ceremony starts at 5pm, please arrive by 4:45pm
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+            <% Guest.attendings.keys.reverse_each do |attending| %>
+                <% next if attending == "not_set" %>
+                <span class="input-group-addon">
+                    <%= f.radio_button :attending, attending, required: true, disabled: lockChanges %>
+                </span>
+                <%= f.label attending.to_sym, class: "form-control"%>
+            <% end %>
+        </div>
+      </div>
+    </div>
+
+    <% if @group.day_before_invite? %>
+      <div class="form-group">
+        <div class="col-md-8 control-label">
+          <label for="day_before">Attending Friday Welcome Party Boat Cruise?</label>
+          <br>Boarding promptly starts at 6:45pm, river and lake cruise from 7-10pm
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <% Guest.day_befores.keys.reverse_each do |day_before| %>
+                    <% next if day_before == "not_set" %>
+                    <span class="input-group-addon">
+                        <%= f.radio_button :day_before, day_before, required: true, disabled: lockChanges %>
+                    </span>
+                    <%= f.label day_before.to_sym, class: "form-control"%>
+                <% end %>
+            </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @group.day_after_invite? %>
+      <div class="form-group">
+        <div class="col-md-8 control-label">
+          <label for="day_after">Attending Sunday Brunch?</label>
+          <br>Swissotel top floor from 9:30am to 11:30am
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <% Guest.day_afters.keys.reverse_each do |day_after| %>
+                    <% next if day_after == "not_set" %>
+                    <span class="input-group-addon">
+                        <%= f.radio_button :day_after, day_after, required: true, disabled: lockChanges %>
+                    </span>
+                    <%= f.label day_after.to_sym, class: "form-control"%>
+                <% end %>
+            </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="name">First Name</label>
+      <div class="col-md-9">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="last_name">Last Name</label>
+      <div class="col-md-9">
+        <%= f.text_field :last_name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="email">E-mail</label>
+      <div class="col-md-9">
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="food">Main Course Dish</label>
+      <div class="col-md-9">
+          <% food_options=['Chicken and Red Snapper Fish Duet',
+                           'Slow Roasted Amish Chicken Breast',
+                           'Pan Roasted Red Snapper Fish',
+                           'Vegetarian Japanese Panko Risotto Cake',
+                           'Childrens Menu'] %>
+        <%= f.select :food,  options_for_select(food_options.collect.with_index.to_a, @guest.food), {}, {disabled: lockChanges} %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="dietary_restrictions">Dietary Restrictions</label>
+      <div class="col-md-9">
+        <%= f.text_field :dietary_restrictions, class: "form-control", disabled: lockChanges %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-3 control-label" for="street">Street Address</label>
+      <div class="col-md-9">
+        <%= f.text_field :street, class: "form-control" %>
+      </div>
+      <label class="col-md-3 control-label" for="city">City</label>
+      <div class="col-md-9">
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+      <label class="col-md-3 control-label" for="state">State</label>
+      <div class="col-md-9">
+        <%= f.text_field :state, class: "form-control" %>
+      </div>
+      <label class="col-md-3 control-label" for="zip">Zip</label>
+      <div class="col-md-9">
+        <%= f.text_field :zip, class: "form-control" %>
+      </div>
+    </div>
+
+    <!-- Form actions -->
+    <div class="form-group">
+      <div class="col-md-8 text-right">
+        Accepting updates until July 29th.
+      </div>
+      <div class="col-md-4 text-right">
+        <button type="submit" class="btn btn-primary btn-lg"><%= submit_name %></button>
+      </div>
+    </div>
+  </fieldset>
+<% end %> <!-- end form -->

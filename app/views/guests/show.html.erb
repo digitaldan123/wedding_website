@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @guest.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @guest.email %>
+</p>
+
+<p>
+  <strong>Day before:</strong>
+  <%= @guest.day_before %>
+</p>
+
+<p>
+  <strong>Day after:</strong>
+  <%= @guest.day_after %>
+</p>
+
+<p>
+  <strong>Food:</strong>
+  <%= @guest.food %>
+</p>
+
+<p>
+  <strong>Dietary restrictions:</strong>
+  <%= @guest.dietary_restrictions %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @guest.address %>
+</p>
+
+<p>
+  <strong>Auth token:</strong>
+  <%= @guest.auth_token %>
+</p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @guest.group %>
+</p>
+
+<%= link_to 'Edit', edit_guest_path(@guest) %> |
+<%= link_to 'Back', guests_path %>

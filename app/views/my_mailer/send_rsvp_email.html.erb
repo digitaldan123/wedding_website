@@ -1,0 +1,40 @@
+<% if @email_type == "save_the_date" %>
+    <h2>Save the Date: August 19th, 2017</h2>
+<% elsif @email_type == "invitation" %>
+    <h2>Please Join LuCinda & Dan: August 19th, 2017</h2>
+<% end %>
+<% # ideally this would work, but seems 1st <p> decides not to include a <br/>
+   # .gsub("<br />\t", "<br />&nbsp;&nbsp;&nbsp;&nbsp;")
+   # 
+%>
+<%= simple_format(@message).gsub(URI.regexp, '<a href="\0">\0</a>').html_safe %>
+<br>
+<% url_path = ENV['SITE_URL'] + "/guests/" + @guest.auth_token %>
+<% if @email_type == "save_the_date" %>
+    <%= link_to(image_tag("save_the_date.jpg"), url_path) %>
+<% elsif @email_type == "invitation" %>
+    <p>
+    Can't view the images below?  <%= link_to("View them in your browser.", url_path + '/view_invitation') %>
+    </p>
+    <% if @group.late_addition? %>
+        <%= link_to(image_tag("invite_first_r1.jpg", alt: "Header for invitation"), url_path) %>
+    <% else %>
+        <%= link_to(image_tag("invite_first.jpg", alt: "Header for invitation"), url_path) %>
+    <% end %>
+    <br>
+    <% if @group.day_before_invite? %>
+        <%= link_to(image_tag("invite_friday.jpg", alt: "Info for Friday cruise"), "https://www.google.com/maps/dir/Swissotel+Chicago,+323+E+Upper+Wacker+Dr,+Chicago,+IL+60601/Chicago's+First+Lady,+60601,+112+E+Upper+Wacker+Dr,+Chicago,+IL+60601/@41.8878554,-87.6240532,17z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x880e2ca829125f79:0xa380b14ac9a102d0!2m2!1d-87.619514!2d41.8872802!1m5!1m1!1s0x880e2caece0b45cb:0x90cb4617847b8d75!2m2!1d-87.6241288!2d41.888409!3e2") %>
+        <br>
+    <% end %>
+    <%= link_to(image_tag("invite_saturday.jpg", alt: "Info for Ceremony and Reception"), url_path) %>
+    <br>
+    <% if @group.day_after_invite? %>
+        <%= link_to(image_tag("invite_sunday.jpg", alt: "Info for Sunday Brunch"), url_path) %>
+        <br>
+    <% end %>
+    <% if @group.late_addition? %>
+        <%= link_to(image_tag("invite_last_r1.jpg", alt: "Additional details"), url_path) %>
+    <% else %>
+        <%= link_to(image_tag("invite_last.jpg", alt: "Additional details"), url_path) %>
+    <% end %>
+<% end %>

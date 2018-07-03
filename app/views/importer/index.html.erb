@@ -1,0 +1,8 @@
+<h1 class="text-center">The Emailer</h1>
+<div class="container">
+<%= form_tag('upload_csv_file', multipart: true, method: "post", :class=>"form-horizontal") do %>
+  <label for="file">File to Upload</label> <%= file_field_tag "file" %>
+  <%= submit_tag %>
+<% end %>
+
+</div>

@@ -1,0 +1,97 @@
+<% flash.each do |name, msg| %>
+  <div class="section alert alert-<%= name == 'notice' ? "info" : "danger" %> fade in">
+    <button class="close" data-dismiss="alert">
+      x
+    </button>
+    <i class="fa-fw fa fa-info"></i>
+    <strong><Info><%= name %>!</strong> <%= raw(msg) %>
+</div>
+<% end %>
+
+<div class="section">
+  <h1 class="text-center">RSVP Emailer</h1>
+
+  <div class="container">
+    <div class="col-md-12 pull-left" style="margin-bottom:2em">
+      <%= radio_button_tag 'email_choice', 'save the date' %>
+      <%= label_tag 'save the date' %>
+      <%= radio_button_tag 'email_choice', 'invitation' %>
+      <%= label_tag 'invitation' %>
+      <%= radio_button_tag 'email_choice', 'reminder', true %>
+      <%= label_tag 'reminder' %>
+    </div>
+    <div class="col-md-4 pull-left">
+      <%= select_tag "group_select", options_from_collection_for_select(@groups, "id", "name") %>
+      <%= select_tag "guest_select", options_from_collection_for_select(@guests, "id", "name") %>
+      <p style="margin-top:2em">
+      <label>Save the date sent: </label>
+      <em id="save_the_date_status"></em>
+      </p>
+      <p>
+      <label>Invitation sent: </label>
+      <em id="invitation_status"></em>
+      </p>
+      <p>
+      <label>Reminder sent: </label>
+      <em id="reminder_status"></em>
+      </p>
+      <p>
+      <label>Attending: </label>
+      <em id="attending"></em>
+      </p>
+      <p>
+      <label>Day before: </label>
+      <em id="day_before"></em>
+      </p>
+      <p>
+      <label>Day after: </label>
+      <em id="day_after"></em>
+      </p>
+      <p>
+      <label>Link RSVP: </label>
+      <em id="view_rsvp_link"></em>
+      </p>
+      <p>
+      <label>Link invite: </label>
+      <em id="view_invitation_link"></em>
+      </p>
+    </div>
+
+    <%= form_tag(send_rsvp_email_path, method: "post", :class=>"form-horizontal col-md-8 pull-right") do %>
+      <fieldset>
+        <%= hidden_field_tag('guestid', '') %>
+        <%= hidden_field_tag('email_type', '') %>
+        <!-- Email input-->
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="email">E-mail</label>
+          <div class="col-md-9">
+            <input id="email" name="email" type="text" placeholder="" class="form-control">
+          </div>
+        </div>
+
+        <!-- Email input-->
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="email">Subject</label>
+          <div class="col-md-9">
+            <input id="sub" name="sub" type="text" placeholder="" class="form-control">
+          </div>
+        </div>
+
+        <!-- Message body -->
+        <div class="form-group">
+          <label class="col-md-3 control-label" for="message">Your message</label>
+          <div class="col-md-9">
+            <textarea class="form-control" id="message" name="message" placeholder="" rows="5"></textarea>
+          </div>
+        </div>
+
+        <!-- Form actions -->
+        <div class="form-group">
+          <div class="col-md-12 text-right">
+            <button type="submit" class="btn btn-primary btn-lg">Send Email</button>
+          </div>
+        </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>

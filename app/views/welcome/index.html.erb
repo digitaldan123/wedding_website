@@ -1,0 +1,336 @@
+<!-- header -->
+<header style="background-image: url(<%= asset_path 'chicago-skyline.jpg' %>);" id="welcome">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="intro-content">
+      <div class="title text-center">The Wedding Ceremony of</div>
+      <div class="brand text-center">
+        <h1 class="wow fadeInDown">Bride</h1>
+        <div class="heart">
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </div>
+        <h1 class="wow fadeInDown">Groom</h1>
+      </div><!-- brand -->
+      <div class="location text-center">Chicago</div>
+      <div class="date text-center">08 . 19 . 2017</div>
+    </div><!-- intro-content -->
+  </div><!-- container -->
+</header>
+
+<div class="section section-parents">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-sm-6">
+        <div class="parents text-center wow fadeIn">
+          <div class="title">Parents of the Groom</div>
+          <h3>Mr. and Mrs. Groom Parents</h3>
+        </div><!-- parents -->
+      </div><!-- col 4 -->
+      <div class="col-md-6 col-sm-6">
+        <div class="parents text-center wow fadeIn">
+          <div class="title">Parents of the Bride</div>
+          <h3>Mr. and Mrs. Bride Parents</h3>
+        </div><!-- parents -->
+      </div><!-- col 4 -->
+    </div><!-- row -->
+  </div><!-- container -->
+</div><!-- section parents -->
+
+<div class="lead text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        We Cordially invite you to the wedding ceremony
+      </div>
+    </div>
+  </div>
+</div><!-- lead -->
+
+<div class="section section-about" style="background-image: url(<%= asset_path 'pw_maze_white.png' %>);">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="media media-about wow fadeInRight">
+          <div class="media-body text-right">
+            <div class="title">The Groom</div>
+            <h2 class="media-heading">Groom</h2>
+            <p>Dedicated engineer. Avid skier.</p>
+          </div>
+          <div class="media-right">
+             <%= image_tag("groom.jpg", class: "media-object") %>
+          </div>
+        </div><!-- media -->
+      </div><!-- col 6 -->
+      <div class="col-md-6">
+        <div class="media media-about wow fadeInLeft">
+          <div class="media-left">
+             <%= image_tag("bride.jpg", class: "media-object") %>
+          </div>
+          <div class="media-body">
+            <div class="title">The Bride</div>
+            <h2 class="media-heading">Bride</h2>
+            <p>True beauty with a great sense of humor.</p>
+          </div>
+        </div><!-- media -->
+      </div><!-- col 6 -->
+    </div><!-- row -->
+  </div><!-- container -->
+</div><!-- section -->
+
+<div class="section section-dates parallax-window" id="ceremony" data-parallax="scroll" data-image-src="<%= asset_path 'dates-bg.jpg'%>">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+        <div class="dates-info wow fadeIn">
+          <div class="ceremony">Wedding &amp; Reception</div>
+          <div class="location">Ignite Glass Studios</div>
+          <div class="day-month">August 19</div>
+          <div class="year">Two Thousand and seventeen</div>
+          <div class="time">5:00PM</div>
+          <div class="cocktail-details">Cocktails to start at 5:30 in urban garden</div>
+        </div><!-- dates info -->
+      </div><!-- col 6 -->
+    </div><!-- row -->
+  </div><!-- container -->
+</div><!-- section-dates -->
+
+<!-- Maps Section -->
+<div class="section section-map" id="map">
+</div><!-- section-map -->
+<script>
+  function initMap() {
+    var igniteContent =
+          '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<a target="_blank"href="https://www.google.com/maps/place/Ignite+Glass+Studios/@41.889091,-87.665219,15z">' +
+          '<h4 id="firstHeading" class="firstHeading">Ignite Glass Studios</h4>'+
+          '<div id="bodyContent">Address: 401 N Armour St, Chicago, IL 60642</div>'+
+          '</a>' +
+          '</div>'+
+          '</div>'
+    var swissContent =
+          '<div id="content">'+
+          '<div id="siteNotice">'+
+          '</div>'+
+          '<a target="_blank"href="https://www.google.com/maps/place/Ignite+Glass+Studios/@41.889091,-87.665219,15z">' +
+          '<a target="_blank"href="https://www.google.com/maps/place/Swissotel+Chicago/@41.8874474,-87.6259719,16z">' +
+          '<h4 id="firstHeading" class="firstHeading">Swissotel</h3>'+
+          '<div id="bodyContent">Address: 323 E Upper Wacker Dr, Chicago, IL 60601</div>'+
+          '</a>' +
+          '</div>'+
+          '</div>'
+
+    var locations = [
+      [igniteContent, 41.889091, -87.665219, 0],
+      [swissContent, 41.8874239, -87.6203723, 1]
+    ];
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: new google.maps.LatLng(41.889224,-87.642415),
+      styles: [{"stylers":[{"hue":"#ff61a6"},{"visibility":"on"},{"invert_lightness":true},{"saturation":40},{"lightness":10}]}],
+      scrollwheel: false,
+    });
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+      if (i==0) {
+        infowindow.setContent(locations[i][0]);
+        infowindow.open(map,marker);
+      }
+    }
+    google.maps.event.addListenerOnce(map, 'bounds_changed', function() {
+      map.fitBounds(map.getBounds());
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['MAP_APIS_KEY']%>&callback=initMap">
+</script>
+<!-- Maps Section Ends Here-->
+
+ <!-- Accommodations -->
+<div class="section section-accommodations" id="accommodations" style="background-image: url(<%= asset_path 'pw_maze_white.png' %>);">
+  <div class="container">
+    <h1 class="text-center wow fadeInDown">Accommodations</h1>
+    <div class="row">
+      <div class="col-md-6">
+        <%= image_tag("swiss_hotel_logo.png", class: "img-responsive") %>
+        <%= image_tag("swiss_hotel_lake_view.jpg", class: "img-responsive") %>
+      </div>
+      <div class="col-md-6">
+        <b>Swissotel Chicago</b>
+        <p>323 E. Upper Wacker Drive<br>
+        Chicago, IL 60601 &nbsp; 1-888-737-9477
+        </p>
+        <p>
+        <em>Custom Rate: $$$<br>
+        Includes: high speed internet, health club, indoor pool and hot tub<br>
+        </p>
+        <label>Parking options</label>
+        <ul>
+           <li>Valet with in/out privileges $70/day.</li>
+           <li>Self park with no in/out privileges $50/day (You can walk or ride our shuttle to all wedding activities).</li>
+          <li><a href="http://chicagoswissotelparking.com/self.htm">Self park garage next door</a>(303 E. Wacker Drive) $36/day. Prices are subject to change.</li>
+          <ul>
+             <li><a href="http://www.chicagoswissotelparking.com/selfdirections.htm">Map and directions</a> to the self park garage. Important note: the garage entrance is on <b><em>Lower</em></b> N. Columbus Drive (NOT <b><em>Upper</em></b> N. Columbus Drive). You may lose cell phone and GPS service on Lower N. Columbus Drive.</li>
+             <li>You can use <a href="https://www.parkwhiz.com/">ParkWhiz</a> or <a href="https://spothero.com/">SpotHero</a> to reserve a parking spot ahead of time.</li>
+          </ul>
+          <li>Park outside of the downtown area  for free and take the CTA (bus/train) in.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Babysitting Services</label>
+        <p>
+        Swissotel works with the following two companies to provide childcare services at the hotel. They can also travel to other hotels/locations.
+        </p>
+        <ul>
+           <li><a href="http://www.americanchildcare.com/chicago.htm">American Child Care</a> 312-644-7300; Prefers 24 hour notice</li>
+           <li><a href="http://www.brightstarcare.com">Bright Star Care</a> 866-618-7827</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <label>Shuttle Service</label>
+        <p>
+        We are excited to offer you a free shuttle service to and from the wedding venue. Below are the shuttle times. Feel free to ride the shuttle both ways if you forget something or need to drop your children back at the hotel for babysitting services.
+        <ul>
+           <li>Shuttle leaves Swissotel at 4:15 PM</li>
+           <li>Shuttle leaves Ignite Glass Studios at:</li>
+           <ul><li>8:30 PM; 9:30 PM; 10:30 PM; 11:30 PM; 12:15 AM</li></ul>
+        </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lead text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        Enjoy prime views right off of the lake and river!
+      </div>
+    </div>
+  </div>
+</div><!-- lead -->
+ <!-- End accommodations -->
+
+<div class="section section-story" id="story">
+  <div class="container">
+    <h1 class="text-center wow fadeInDown">Our Story</h1>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </div><!-- container -->
+</div><!-- section-story -->
+
+<div class="section section-gallery" id="gallery" data-parallax="scroll" data-image-src="<%= asset_path 'gallery-bg.jpg' %>">
+  <div class="overlay overlay-light"></div>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="wow fadeInDown">Gallery</h1>
+        <div class="sub-title wow fadeInDown">Moments we have spent together</div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <a href="<%= asset_path 'gallery/img1.jpg'%>" class="photo wow fadeInUp">
+          <%= image_tag("gallery/img1_thumb.jpg", class: "img-responsive") %>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <a href="<%= asset_path 'gallery/img2.jpg'%>" data-wow-delay="0.5s" class="photo wow fadeInUp">
+          <%= image_tag("gallery/img2_thumb.jpg", class: "img-responsive") %>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <a href="<%= asset_path 'gallery/img3.jpg'%>" data-wow-delay="1s" class="photo wow fadeInUp">
+          <%= image_tag("gallery/img3_thumb.jpg", class: "img-responsive") %>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <a href="<%= asset_path 'gallery/img4.jpg'%>" class="photo wow fadeInUp">
+          <%= image_tag("gallery/img4_thumb.jpg", class: "img-responsive") %>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <a href="<%= asset_path 'gallery/img5.jpg'%>" data-wow-delay="0.5s" class="photo wow fadeInUp">
+          <%= image_tag("gallery/img5_thumb.jpg", class: "img-responsive") %>
+        </a>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <a href="<%= asset_path 'gallery/img6.jpg'%>" data-wow-delay="1s" class="photo wow fadeInUp">
+          <%= image_tag("gallery/img6_thumb.jpg", class: "img-responsive") %>
+        </a>
+      </div>
+    </div>
+  </div>
+</div><!-- section-gallery -->
+
+<!-- section-wedding party-->
+<div class="section section-about" id="weddingparty" style="background-image: url(<%= asset_path 'pw_maze_white.png' %>);">
+  <div class="container">
+    <h1 class="text-center wow fadeInDown">Wedding Party</h1>
+    <div class="row">
+      <div class="col-md-6 centered">
+        <h3 class="wow fadeInUp">Bridesmaids</h3>
+        <ul class="wow fadeInLeft">
+          <li><b>Person A</b> <ul><li>Matron of Honor - Sister of the Bride</li></ul></li>
+          <li><b>Person B</b><ul><li>Bridesmaid - Sister of the Groom</li></ul></li>
+          <li><b>Person C</b><ul><li>Bridesmaid - Childhood Friend</li></ul></li>
+          <li><b>Person D</b><ul><li>Bridesmaid - College Friend</li></ul></li>
+        </ul>
+      </div>
+      <div class="col-md-6 centered">
+        <h3 class="wow fadeInUp">Groomsmen</h3>
+        <ul class="wow fadeInRight">
+          <li><b>Person1</b><ul><li>Best Man - Brother of the Groom</li></ul></li>
+          <li><b>Person2</b><ul><li>Groomsman - Childhood Friend</li></ul></li>
+          <li><b>Person3</b><ul><li>Groomsman - Childhood Friend</li></ul></li>
+          <li><b>Person4</b><ul><li>Groomsman - Childhood Friend</li></ul></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section section-gift" id="registries">
+  <div class="container">
+    <h1 class="text-center wow fadeInDown">Gift Registries</h1>
+    <div class="sub-title text-center wow fadeInDown">The most important gift to us is to have you share our day.</div>
+    <p class="text-center wow fadeIn">and tons of electronics...</p>
+    <div class="gift-partner">
+      <a href="https://www.myregistry.com/"><%= image_tag("myregistry.png", class: "img-responsive") %></a>
+    </div><!-- gift partner -->
+  </div><!-- container -->
+</div><!-- section-gift -->
+
+<!-- Gallery -->
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+  <div class="slides"></div>
+  <h3 class="title"></h3>
+  <a class="prev">‹</a>
+  <a class="next">›</a>
+  <a class="close">×</a>
+  <a class="play-pause"></a>
+  <ol class="indicator"></ol>
+</div>
+
+<!-- back to top -->
+<a href="#" id="back-to-top">
+  <%= image_tag 'top-icon.png' %>
+</a>
+<script>
+setTimeout(function() {
+   history.replaceState({}, '', window.location.href.substring(0, window.location.href.indexOf('#')))
+},50);
+</script>

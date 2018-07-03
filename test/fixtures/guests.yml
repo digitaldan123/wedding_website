@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  day_before: false
+  day_after: false
+  food: 1
+  dietary_restrictions: MyText
+  address: MyText
+  auth_token: MyString
+  group: one
+
+two:
+  name: MyString
+  email: MyString
+  day_before: false
+  day_after: false
+  food: 1
+  dietary_restrictions: MyText
+  address: MyText
+  auth_token: MyString
+  group: two

@@ -1,10 +1,37 @@
+# binary files
+bin/*
+
+# sensitive data
+config/application.yml
+
+# Ignore bundler config.
+/.bundle
+path/*
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+
+
+
 *.rbc
 capybara-*.html
 .rspec
-/log
-/tmp
-/db/*.sqlite3
-/db/*.sqlite3-journal
 /public/system
 /coverage/
 /spec/tmp
@@ -24,7 +51,6 @@ config/master.key
 .env
 
 ## Environment normalization:
-/.bundle
 /vendor/bundle
 
 # these should all be checked in to normalize the environment:
@@ -40,9 +66,6 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
-
-# Ignore Byebug command history file.
-.byebug_history
 
 # Ignore node_modules
 node_modules/

@@ -1,0 +1,39 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand visible-xs" href="/">LuCinda &amp Dan</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <% if params[:controller] == 'welcome' %>
+          <li><a class="scrollto" href="#welcome">Welcome</a></li>
+          <li><a class="scrollto" href="#ceremony">Ceremony</a></li>
+          <li><a class="scrollto" href="#accommodations">Accommodations</a></li>
+          <li><a class="scrollto" href="#story">Our Story</a></li>
+          <li><a class="scrollto" href="#gallery">Gallery</a></li>
+          <li><a class="scrollto" href="#weddingparty">Wedding Party</a></li>
+          <li><a class="scrollto" href="#registries">Registry</a></li>
+        <% else %>
+          <li><%= link_to "Welcome", home_path(anchor: "welcome"), class: "scrollto" %>
+          <li><%= link_to "Ceremony", home_path(anchor: "ceremony"), class: "scrollto" %>
+          <li><%= link_to "Accommodations", home_path(anchor: "accommodations"), class: "scrollto" %>
+          <li><%= link_to "Our Story", home_path(anchor: "story"), class: "scrollto" %>
+          <li><%= link_to "Gallery", home_path(anchor: "gallery"), class: "scrollto" %>
+          <li><%= link_to "Wedding Party", home_path(anchor: "weddingparty"), class: "scrollto" %>
+          <li><%= link_to "Registry", home_path(anchor: "registries"), class: "scrollto" %>
+        <% end %>
+          <li><%= link_to "RSVP", guests_path %></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+

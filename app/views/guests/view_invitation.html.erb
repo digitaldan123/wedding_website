@@ -1,0 +1,26 @@
+<% url_path = ENV['SITE_URL'] + "/guests/" + @guest.auth_token %>
+<div class="container">
+  <div class="section">
+    <div class="row">
+      <div class="col-md-12">
+        <% if @group.late_addition? %>
+            <%= link_to(image_tag("invite_first_r1.jpg", alt: "Header for invitation", class: "img-responsive center-block"), url_path) %>
+        <% else %>
+            <%= link_to(image_tag("invite_first.jpg", alt: "Header for invitation", class: "img-responsive center-block"), url_path) %>
+        <% end %>
+        <% if @group.day_before_invite? %>
+          <%= link_to(image_tag("invite_friday.jpg", alt: "Info for Friday events", class: "img-responsive center-block"), "https://www.google.com/maps/dir/Swissotel+Chicago,+323+E+Upper+Wacker+Dr,+Chicago,+IL+60601/Chicago's+First+Lady,+60601,+112+E+Upper+Wacker+Dr,+Chicago,+IL+60601/@41.8878554,-87.6240532,17z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x880e2ca829125f79:0xa380b14ac9a102d0!2m2!1d-87.619514!2d41.8872802!1m5!1m1!1s0x880e2caece0b45cb:0x90cb4617847b8d75!2m2!1d-87.6241288!2d41.888409!3e2") %>
+        <% end %>
+        <%= link_to(image_tag("invite_saturday.jpg", alt: "Info for Ceremony and Reception", class: "img-responsive center-block"), url_path) %>
+        <% if @group.day_after_invite? %>
+          <%= link_to(image_tag("invite_sunday.jpg", alt: "Info for Sunday Brunch", class: "img-responsive center-block"), url_path) %>
+        <% end %>
+        <% if @group.late_addition? %>
+            <%= link_to(image_tag("invite_last_r1.jpg", alt: "Additional details", class: "img-responsive center-block"), url_path) %>
+        <% else %>
+            <%= link_to(image_tag("invite_last.jpg", alt: "Additional details", class: "img-responsive center-block"), url_path) %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

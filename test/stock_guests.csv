@@ -1,0 +1,15 @@
+Group name,First Name,Last Name,Email,Street,City,State,Zip Code
+Group One,nameG1P1,lastG1P1,emailtest1@aol.com,1234 street one,Palatine,IL,60074
+Group Two,nameG2P1,lastG2P1,emailg2@blah.com,1234 street two,Arlington Heights,IL,60004
+,nameG2P2,lastG2P2,emailg2_p2@blah.com,,,,
+Group Three,nameG3P1,lastG3P1,emailg3@blah.com,1234 street three,Roselle,IL,60172
+,nameG3P2,lastG3P2,,,,,
+Group Four,nameG4P1,lastG4p1,,1234 street four,Norridge,IL,60656
+,nameG4P1,lastg4p2,emailp2ing4@gmail.com,,,,
+Group Five,nameG5P1,lastg5p1,emailp1g5@blah.com,1234 street five,Lake in the Hills,IL,60156
+,nameG5P2,lastg5p2,,,,,
+Group Six,nameG6p1,lastG6p1,emailg6_p1@blah.com,,Vernon Hills,IL,60061
+,nameG6p2,lastG6p2,,,,,
+,nameG6p3,lastG6p3,emailg6_p3@blah.com,,,,
+,nameG6p4,lastG6p4,,,,,
+,nameG6p5,nameG6p5,,,,,
